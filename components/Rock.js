@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { LinearGradient } from 'expo-linear-gradient';
+
+
 
 const choices = [
     { name: 'rock', icon: 'hand-rock-o' },
@@ -37,27 +40,38 @@ const App = () => {
     };
 
     return (
+
         <View style={styles.container}>
-            <Text style={styles.title}>Rock, Paper, Scissors</Text>
-            <Text style={styles.score}>
-                Score: Player {score.player} - {score.computer} Computer
-            </Text>
-            <View style={styles.choicesContainer}>
-                {choices.map((choice) => (
-                    <TouchableOpacity
-                        key={choice.name}
-                        style={styles.choiceButton}
-                        onPress={() => playGame(choice.name)}
-                    >
-                        <Icon name={choice.icon} size={50} color="black" />
-                    </TouchableOpacity>
-                ))}
-            </View>
-            <Text style={styles.result}>{result}</Text>
-            <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
-                <Text style={styles.resetText}>Reset Game</Text>
-            </TouchableOpacity>
+
+            <LinearGradient
+                colors={["purple", "pink", "white"]}
+                start={{ x: 0, y: 0.8 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.background}
+            >
+                <Text style={styles.title}>Rock, Paper, Scissors</Text>
+                <Text style={styles.score}>
+                    Score: Player {score.player} - {score.computer} Computer
+                </Text>
+                <View style={styles.choicesContainer}>
+                    {choices.map((choice) => (
+                        <TouchableOpacity
+                            key={choice.name}
+                            style={styles.choiceButton}
+                            onPress={() => playGame(choice.name)}
+                        >
+                            <Icon name={choice.icon} size={50} color="black" />
+                        </TouchableOpacity>
+                    ))}
+                </View>
+
+                <Text style={styles.result}>{result}</Text>
+                <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
+                    <Text style={styles.resetText}>Reset Game</Text>
+                </TouchableOpacity>
+            </LinearGradient>
         </View>
+
     );
 };
 
@@ -67,6 +81,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'purple',
+
     },
     title: {
         fontSize: 24,
@@ -104,7 +119,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     resetText: {
-        color: '#ffffff',
+        color: 'white',
         fontWeight: 'bold',
     },
 });
