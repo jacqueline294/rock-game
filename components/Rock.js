@@ -1,24 +1,31 @@
+//Import necessary components
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
 
 
-
+//an array of the choices that in the game 
 const choices = [
     { name: 'rock', icon: 'hand-rock-o' },
     { name: 'paper', icon: 'hand-paper-o' },
     { name: 'scissors', icon: 'hand-scissors-o' },
 ];
-
+// Define the main component of the application
 const App = () => {
+    // Define state variables for result and score, initialized with null and { player: 0, computer: 0 } respectively
     const [result, setResult] = useState(null);
     const [score, setScore] = useState({ player: 0, computer: 0 });
 
+
+    // Determine the result of the game based on player's and computer's choices
+
     const playGame = (playerChoice) => {
+        // Generate a random index for the computer choice
         const randomIndex = Math.floor(Math.random() * 3);
         const computerChoice = choices[randomIndex].name;
 
+        // the game results
         if (playerChoice === computerChoice) {
             setResult("It's a tie!");
         } else if (
@@ -33,14 +40,14 @@ const App = () => {
             setScore((prevScore) => ({ ...prevScore, computer: prevScore.computer + 1 }));
         }
     };
-
+    // function to reset the gmae 
     const resetGame = () => {
         setResult(null);
         setScore({ player: 0, computer: 0 });
     };
 
     return (
-
+        // Return JSX for rendering the UI
         <View style={styles.container}>
 
             <LinearGradient
@@ -64,17 +71,18 @@ const App = () => {
                         </TouchableOpacity>
                     ))}
                 </View>
-
-                <Text style={styles.result}>{result}</Text>
-                <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
-                    <Text style={styles.resetText}>Reset Game</Text>
-                </TouchableOpacity>
             </LinearGradient>
+
+            <Text style={styles.result}>{result}</Text>
+            <TouchableOpacity style={styles.resetButton} onPress={resetGame}>
+                <Text style={styles.resetText}>Reset Game</Text>
+            </TouchableOpacity>
+
         </View>
 
     );
 };
-
+//styling 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -117,6 +125,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         padding: 10,
         borderRadius: 5,
+
     },
     resetText: {
         color: 'white',
@@ -124,4 +133,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default App;
+export default App; // Export the main component
